@@ -1,0 +1,52 @@
+</main>
+
+<footer>
+  <p>Copyright © <%= new Date().getFullYear() %></p>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  //we are using it like this because new blog are added dynamically
+$(document).on(`click`,`.blog`,function() {
+//$(".blog").click(function() {
+  const blogIndex = $(this).data(`id`);
+  console.log("Index is", blogIndex);
+  window.location.href = `/view-blog/${blogIndex}`;
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to hide the tooltip
+  function hideTooltip(tooltipText) {
+    tooltipText.style.visibility = 'hidden';
+    tooltipText.style.opacity = '0';
+  }
+
+  // Function to show the tooltip
+  function showTooltip(tooltipText) {
+    tooltipText.style.visibility = 'visible';
+    tooltipText.style.opacity = '1';
+  }
+
+  // Get all tooltip containers
+  const tooltipContainers = document.querySelectorAll('.tooltip');
+
+  tooltipContainers.forEach(container => {
+    const tooltipText = container.querySelector('.tooltiptext');
+    const buttons = container.querySelectorAll('.btns .edit-button, .btns .delete-button');
+
+    // Add event listeners to the tooltip container
+    container.addEventListener('mouseenter', () => showTooltip(tooltipText));
+    container.addEventListener('mouseleave', () => hideTooltip(tooltipText));
+
+    // Add event listeners to buttons inside .btns
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => hideTooltip(tooltipText));
+      button.addEventListener('mouseleave', () => showTooltip(tooltipText));
+    });
+  });
+});
+
+</script>
+</body>
+
+</html>
